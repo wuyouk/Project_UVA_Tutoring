@@ -1,29 +1,3 @@
-# isa_mysql:
-#    image: mysql:5.7.10
-#    environment:
-#     MYSQL_DATABASE: cs4501
-#     MYSQL_USER: www
-#     DATABASE_PASSWORD: keystone55
-#     MYSQL_ROOT_PASSWORD: keystone55
-#     command: bash -c "mysql -u root -p && keystone55 && create user 'www'@'%' identified by 'keystone55'; && grant all on cs4501.* to 'www'@'%'; && exit && mod_wsgi-express start-server project4501/wsgi.py"
-
-# isa_models:
-#   image: tp33/django:1.2
-#   links:
-#     - isa_mysql:db
-#   command: bash -c "pip install djangorestframework && git clone https://github.com/Mcronk/project4501.git && cd project4501 && python manage.py migrate && python manage.py runserver"
-
-#isa_exp:
-#  image: tp33/django:1.2
-#  links:
-#    - isa_models:models-api
-#  command: bash -c "pip install djangorestframework && git clone https://github.com/Mcronk/project4501_exp.git && cd project4501_exp && python manage.py migrate && python manage.py runserver"
-
-#isa_web:
-#  image: tp33/django:1.2
-#  links:
-#    - isa_exp:exp-api 
-#  command: bash -c "pip install djangorestframework && git clone https://github.com/Mcronk/project4501_web.git && cd project4501_web && python manage.py migrate && python manage.py runserver" 
 
 
 models:
@@ -33,8 +7,8 @@ models:
    ports:
       - "8001:8000"
    volumes:
-      - home/johnson/Desktop/project4501_models:/app
-   command: "mod_wsgi-express start-server --reload-on-changes project4501_models/project4501_models/wsgi.py"
+      - /home/johnson/Desktop/project4501_models/project4501_models:/app
+   command: "mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py"
 
 exp:
    image: tp33/django:1.2
@@ -43,8 +17,8 @@ exp:
    ports:
       - "8002:8000"
    volumes:
-      - /home/johnson/Desktop/project4501_exp:/app
-   command: "mod_wsgi-express start-server --reload-on-changes project4501_exp/project4501_exp/wsgi.py"
+      - /home/johnson/Desktop/project4501_exp/project4501_exp:/app
+   command: "mod_wsgi-express start-server --reload-on-changes project4501_exp/wsgi.py"
 
 web:
    image: tp33/django:1.2
@@ -53,5 +27,5 @@ web:
    ports:
       - "8000:8000"
    volumes:
-      - /home/johnson/Desktop/project4501_web:/app
-   command: "mod_wsgi-express start-server --reload-on-changes project4501_web/project4501_web/wsgi.py"
+      - /home/johnson/Desktop/project4501_web/project4501_web:/app
+   command: "mod_wsgi-express start-server --reload-on-changes project4501_web/wsgi.py"
