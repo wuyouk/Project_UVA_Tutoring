@@ -27,4 +27,4 @@ web:
    volumes:
       - /home/johnson/Desktop/project4501_web/project4501_web:/app
 
-   command: bash -c "pip install requests && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
+   command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
