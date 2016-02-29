@@ -36,7 +36,7 @@ models:
       - "8001:8000"
    # volumes:
    #    - /home/johnson/Desktop/project4501_models/project4501_models:/app
-   command: bash -c "git clone https://github.com/Mcronk/project4501_models.git && pip install requests && mod_wsgi-express start-server --working-directory /app/project4501_models --reload-on-changes /app/project4501_models/project4501_models/wsgi.py" 
+   command: bash -c "git clone https://github.com/Mcronk/project4501_models.git && cd /app/project4501_models && python manage.py loaddata group3data.json && mod_wsgi-express start-server --working-directory /app/project4501_models --reload-on-changes /app/project4501_models/project4501_models/wsgi.py" 
 
 exp:
    image: tp33/django:1.2
