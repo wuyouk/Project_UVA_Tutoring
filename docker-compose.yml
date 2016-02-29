@@ -1,12 +1,42 @@
+# models:
+#    image: tp33/django:1.2
+#    external_links:
+#       - mysql:db
+#    ports:
+#       - "8001:8000"
+#    volumes:
+#       - /home/johnson/Desktop/project4501_models/project4501_models:/app
+#    command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py" 
+
+# exp:
+#    image: tp33/django:1.2
+#    links:
+#       - models:models-api
+#    ports:
+#       - "8002:8000"
+#    volumes:
+#       - /home/johnson/Desktop/project4501_exp/project4501_exp:/app
+#    command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_exp/wsgi.py"
+
+# web:
+#    image: tp33/django:1.2
+#    links:
+#       - exp:exp-api
+#    ports:
+#       - "8000:8000"
+#    volumes:
+#       - /home/johnson/Desktop/project4501_web/project4501_web:/app
+#    command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
+
 models:
    image: tp33/django:1.2
    external_links:
       - mysql:db
    ports:
       - "8001:8000"
-   volumes:
-      - /home/johnson/Desktop/project4501_models/project4501_models:/app
-   command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py" 
+   # volumes:
+   #    - /home/johnson/Desktop/project4501_models/project4501_models:/app
+   command: bash -c "git clone https://github.com/Mcronk/project4501_models.git && pip install requests && mod_wsgi-express start-server --working-directory /app/project4501_models --reload-on-changes /app/project4501_models/project4501_models/wsgi.py" 
 
 exp:
    image: tp33/django:1.2
@@ -14,9 +44,9 @@ exp:
       - models:models-api
    ports:
       - "8002:8000"
-   volumes:
-      - /home/johnson/Desktop/project4501_exp/project4501_exp:/app
-   command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_exp/wsgi.py"
+   # volumes:
+   #    - /home/johnson/Desktop/project4501_exp/project4501_exp:/app
+   command: bash -c "git clone https://github.com/Mcronk/project4501_exp.git && pip install requests && mod_wsgi-express start-server --working-directory /app/project4501_exp --reload-on-changes /app/project4501_exp/project4501_exp/wsgi.py"
 
 web:
    image: tp33/django:1.2
@@ -24,7 +54,6 @@ web:
       - exp:exp-api
    ports:
       - "8000:8000"
-   volumes:
-      - /home/johnson/Desktop/project4501_web/project4501_web:/app
-
-   command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
+   # volumes:
+   #    - /home/johnson/Desktop/project4501_web/project4501_web:/app
+   command: bash -c "git clone https://github.com/Mcronk/project4501_web.git && pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app/project4501_web --url-alias /static /app/project4501_web/project4501_web/static /app/project4501_web/project4501_web/wsgi.py --reload-on-changes"
