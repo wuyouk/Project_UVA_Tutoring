@@ -8,6 +8,29 @@ bs5sk@Virginia.EDU, mpc3ea@Virginia.EDU, yw5g@Virginia.EDU
 
 <br>
 
+###Project 5###
+
+Please download the following releases, change the volume path in **docker-compose.yml** to match local setting, then **docker-compose up**.
+
+1. [project4501_web](https://github.com/Mcronk/project4501_web/releases)
+2. [project4501_exp](https://github.com/Mcronk/project4501_exp/releases)
+3. [project4501_models](https://github.com/Mcronk/project4501_models/releases)
+4. [project4501_batch](https://github.com/Mcronk/project4501_batch/releases)
+5. [Compose](https://github.com/Mcronk/project4501_compose/releases)
+
+*Note: the default volume setting uses the downloaded repo name:* \<name\>-master
+
+<br>
+**Project Flow**:
+
+1. Visit <[Home page](http://localhost:8000)>
+  * User can use the SEARCH bar on each page to search for desired courses
+  * Search key words include course name, tag, description, available time, price, qualification
+2. Create Course <[Listing page](http://localhost:8000/listing/)>
+  * Create a new course, new course would be indexed
+  * Start a new search, newly added course would be displayed if query matches
+<br>
+
 ###Project 4###
 
 Please download the following releases, change the volume path in **docker-compose.yml** to match local setting, then **docker-compose up**.
