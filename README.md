@@ -29,6 +29,7 @@ Please download the following releases, change the volume path in **docker-compo
 2. Create Course <[Listing page](http://localhost:8000/listing/)>
   * Create a new course, new course would be indexed
   * Start a new search, newly added course would be displayed if query matches
+ 
 <br>
 
 ###Project 4###
