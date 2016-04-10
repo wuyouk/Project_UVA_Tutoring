@@ -131,7 +131,7 @@
 # For DigitalOcean
 kafka:
    image: spotify/kafka
-   name: kafka
+   container_name: kafka
    environment:
       ADVERTISED_HOST: kafka
       ADVERTISED_PORT: 9092
@@ -139,7 +139,7 @@ kafka:
 
 es:
    image: elasticsearch:2.0
-   name: es
+   container_name: es
    ports:
       - "9200:9200"
 
