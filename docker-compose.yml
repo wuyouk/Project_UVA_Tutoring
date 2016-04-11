@@ -151,7 +151,7 @@ models:
       - "8001:8000"
    volumes:
       - /root/team3/project4501_models:/app
-   command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py" 
+   command: bash -c "pip install requests==2.5.3 && mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py" 
 
 exp:
    image: tp33/django-docker:1.3
@@ -163,7 +163,7 @@ exp:
       - "8002:8000"
    volumes:
       - /root/team3/project4501_exp:/app
-   command: bash -c "pip install requests && mod_wsgi-express start-server --log-to-terminal --reload-on-changes project4501_exp/wsgi.py"
+   command: bash -c "pip install requests==2.5.3 && mod_wsgi-express start-server --log-to-terminal --reload-on-changes project4501_exp/wsgi.py"
 
 web:
    image: tp33/django-docker:1.3
@@ -173,7 +173,7 @@ web:
       - "8000:8000"
    volumes:
       - /root/team3/project4501_web:/app
-   command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
+   command: bash -c "pip install requests==2.5.3 && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
 
 batch:
    image: tp33/django-docker:1.3
@@ -185,4 +185,4 @@ batch:
       - "8003:8000"
    volumes:
       - /root/team3/project4501_batch:/app
-   command: bash -c "pip install requests && python searchIndexer.py" 
+   command: bash -c "pip install requests==2.5.3 && python searchIndexer.py" 
