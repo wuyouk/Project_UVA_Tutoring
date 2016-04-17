@@ -8,9 +8,68 @@ bs5sk@Virginia.EDU, mpc3ea@Virginia.EDU, yw5g@Virginia.EDU
 
 <br>
 
+###Project 6###
+
+Four improvements are done in this iteration.
+
+1. Hosting on DigitalOcean (Cronk, Michael)
+  * Digital Ocean Link:  http://159.203.160.81:8000
+2. Integration tests (Shin, Byung Eun)
+  * Download [project4501_test](https://github.com/Mcronk/project4501_test/releases) and run ```python test.py```
+  * Selenium was used to create integration tests for the web front-end. These tests were used to simulate these five different actions that users could take:
+    * Make a search query
+    * Sign up for the website
+    * Create a tutoring posting while logged in
+    * Create a tutoring posting while logged out
+    * Log in
+  * The front-end passed all of these tests but it would be useful in the future to run these tests again after making changes to the API or web layers. The result of the tests are shown below.
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/integration_test.png)
+3. Performance testing (Wu, You)
+  * Download [project4501_test](https://github.com/Mcronk/project4501_test/releases). If use non-GUI mode, run ```jmeter -n -t <path>/ThreadGroup.jmx```, otherwise, open *ThreadGroup.jmx* with installed JMETER.
+  * Use Jmeter, by setting different number of threads and ramp-up period, the following GET and POST request sequence is carried out.
+    * GET1: Visit home, courses, course-1, course-2, course-3 pages in a row. Threads = 50, period = 10.
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/GET-50-10.png)
+      * Latency mainly comes from Courses Page. There are 393 courses in the database and obviously collecting these courses’ information takes a lot of time.
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/393%20courses.png)
+      * GET2: Visit home, course-1, course-2, course-3 pages in a row (No courses request this time). Threads = 100, period = 10.
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/GET2-100-10.png)
+      * It is much faster this time. Increasing the load slows down the response time. See below for Threads = 150, period = 10 and Threads = 200, period = 10 samples.
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/GET2-150-10.png)
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/GET2-200-10.png)
+      * POST1: Visit home, sign up, log in, create course, search, log out. See below for Threads = 20, period = 10 and Threads = 30, period = 10 samples. 
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/POST-20-10.png)
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/POST-30-10.png)
+      * It is much slower for POST requests than GET requests. Among the requests, Search seems takes the greatest time. So let’s do the following requests without Search.
+      * POST2: Visit home, sign up, log in, create course, log out. See below for Threads = 30, period = 10, Threads = 50, period = 10 and Threads = 80, period = 10  samples. 
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/POST2-30-10.png)
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/POST2-50-10.png)
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/POST2-80-10.png)
+      * Latency becomes a problem (average 1s for Login and 3s for Create course) until we increase load to 8 threads per second. (3 threads per sec and 5 threads per sec are fine)
+      * Performance graphs provided by DigitalOcean
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/do_bandwidth.png)
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/do_cpu.png)
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/do_disk.png)
+4. Load balancing (Cronk, Michael and Wu, You)
+  * Use [Pen] (https://hub.docker.com/r/galexrt/pen/) as the load balancer in front of *WEB* layer.
+  * After ```docker-compose up```, run ```docker-compose scale web=3``` and ```docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000```. Number of scaling is up to change.
+  * In the home page, small header under the “GitHub” button displays the container ID. Refreshing will cause Pen to switch which container the request is sent to.  This will change the displayed container ID.  
+
+Please download the following releases, change the volume path in *docker-compose.yml* to match local setting, then ```docker-compose up```.
+
+1. [project4501_web](https://github.com/Mcronk/project4501_web/releases)
+2. [project4501_exp](https://github.com/Mcronk/project4501_exp/releases)
+3. [project4501_models](https://github.com/Mcronk/project4501_models/releases)
+4. [project4501_batch](https://github.com/Mcronk/project4501_batch/releases)
+5. [project4501_test](https://github.com/Mcronk/project4501_test/releases)
+6. [Compose](https://github.com/Mcronk/project4501_compose/releases)
+
+*Note: models, exp and batch are the same since last interation and the default volume setting uses the downloaded repo name:* \<name\>-master
+
+<br>
+
 ###Project 5###
 
-Please download the following releases, change the volume path in **docker-compose.yml** to match local setting, then **docker-compose up**.
+Please download the following releases, change the volume path in *docker-compose.yml* to match local setting, then ```docker-compose up```.
 
 1. [project4501_web](https://github.com/Mcronk/project4501_web/releases)
 2. [project4501_exp](https://github.com/Mcronk/project4501_exp/releases)
@@ -34,7 +93,7 @@ Please download the following releases, change the volume path in **docker-compo
 
 ###Project 4###
 
-Please download the following releases, change the volume path in **docker-compose.yml** to match local setting, then **docker-compose up**.
+Please download the following releases, change the volume path in *docker-compose.yml* to match local setting, then ```docker-compose up```.
 
 1. [project4501_web](https://github.com/Mcronk/project4501_web/releases)
 2. [project4501_exp](https://github.com/Mcronk/project4501_exp/releases)
