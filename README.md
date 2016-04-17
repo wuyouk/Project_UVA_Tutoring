@@ -53,6 +53,8 @@ Four improvements are done in this iteration.
   * Use [Pen] (https://hub.docker.com/r/galexrt/pen/) as the load balancer in front of *WEB* layer.
   * After ```docker-compose up```, run ```docker-compose scale web=3``` and ```docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000```. Number of scaling is up to change.
   * In the home page, small header under the “GitHub” button displays the container ID. Refreshing will cause Pen to switch which container the request is sent to.  This will change the displayed container ID.  
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/pen_1.png)
+![alt tag](https://github.com/Mcronk/project4501_test/blob/master/screenshot_test/pen_2.png)
 
 The above description can also be viewed in the Google Doc [write up](https://docs.google.com/a/virginia.edu/document/d/14VVxMV0ZZ5zEVFEPpaYQqixSamFwxQqzfXEdTXcKx88/edit?usp=sharing).
 
