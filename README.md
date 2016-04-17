@@ -54,6 +54,8 @@ Four improvements are done in this iteration.
   * After ```docker-compose up```, run ```docker-compose scale web=3``` and ```docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000```. Number of scaling is up to change.
   * In the home page, small header under the “GitHub” button displays the container ID. Refreshing will cause Pen to switch which container the request is sent to.  This will change the displayed container ID.  
 
+The above description can also be viewed in the Google Doc [write up](https://docs.google.com/a/virginia.edu/document/d/14VVxMV0ZZ5zEVFEPpaYQqixSamFwxQqzfXEdTXcKx88/edit?usp=sharing).
+
 Please download the following releases, change the volume path in *docker-compose.yml* to match local setting, then ```docker-compose up```.
 
 1. [project4501_web](https://github.com/Mcronk/project4501_web/releases)
