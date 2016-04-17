@@ -126,12 +126,6 @@ batch:
 #       - /home/johnson/Desktop/project4501_batch/project4501_batch:/app
 #    command: bash -c "pip install requests && python searchIndexer.py" 
 
-# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000
-# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000
-# docker-compose scale web=3
-# docker run -d --name pen -p 8000:8000 --link compose_web1_1:compose_web1_1 --link compose_web2_1:compose_web2_1 galexrt/pen:latest -r 8000 compose_web1_1:8000 compose_web2_1:8000
-# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000
-
 # pen:
 #    image: galexrt/pen:latest
 #    links:
@@ -144,9 +138,9 @@ batch:
    # command: bash -c "-r 8000 web1:8000 web2:8000"
    # command: bash -c "-r 8000 compose_web1_1:8000 compose_web2_1:8000"
 
+# docker-compose scale web=3
 # docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000
 # docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000
-# docker-compose scale web=3
 
 
 # For DigitalOcean
@@ -207,4 +201,3 @@ batch:
 #    volumes:
 #       - /root/team3/project4501_batch:/app
 #    command: bash -c "pip install requests==2.5.3 && python searchIndexer.py" 
-
