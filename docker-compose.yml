@@ -58,77 +58,6 @@
 #    command: bash -c "pip install requests && python searchIndexer.py" 
 
 # Local setting
-# kafka:
-#    image: spotify/kafka
-#    name: kafka
-#    environment:
-#       ADVERTISED_HOST: kafka
-#       ADVERTISED_PORT: 9092
-#    hostname: kafka
-
-# es:
-#    image: elasticsearch:2.0
-#    name: es
-#    ports:
-#       - "9200:9200"
-
-# models:
-#    image: tp33/django-docker:1.3
-#    external_links:
-#       - mysql:db
-#    ports:
-#       - "8001:8000"
-#    volumes:
-#       - /home/johnson/Desktop/project4501_models/project4501_models:/app
-#    command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py" 
-
-# exp:
-#    image: tp33/django-docker:1.3
-#    links:
-#       - models:models-api
-#       - kafka:kafka
-#       - es:es
-#    ports:
-#       - "8002:8000"
-#    volumes:
-#       - /home/johnson/Desktop/project4501_exp/project4501_exp:/app
-#    command: bash -c "pip install requests && mod_wsgi-express start-server --log-to-terminal --reload-on-changes project4501_exp/wsgi.py"
-
-# web:
-#    image: tp33/django-docker:1.3
-#    links:
-#       - exp:exp-api
-#    # ports:
-#    #    - "80"
-#    volumes:
-#       - /home/johnson/Desktop/project4501_web/project4501_web:/app
-#    command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
-
-# batch:
-#    image: tp33/django-docker:1.3
-#    links:
-#       - kafka:kafka
-#       - es:es
-#       - exp:exp-api
-#    ports:
-#       - "8003:8000"
-#    volumes:
-#       - /home/johnson/Desktop/project4501_batch/project4501_batch:/app
-#    command: bash -c "pip install requests && python searchIndexer.py" 
-
-# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000
-# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000
-# docker-compose scale web=3
-# pen:
-#    image: galexrt/pen:latest
-#    links:
-#       - web1
-#       - web2
-#    ports:
-#       - "8000:8000"
-#    command: bash -c "-r 8000 compose_web1_1:8000 compose_web2_1:8000"
-
-# For DigitalOcean
 kafka:
    image: spotify/kafka
    name: kafka
@@ -150,7 +79,7 @@ models:
    ports:
       - "8001:8000"
    volumes:
-      - /root/team3/project4501_models:/app
+      - /home/johnson/Desktop/project4501_models/project4501_models:/app
    command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py" 
 
 exp:
@@ -162,17 +91,27 @@ exp:
    ports:
       - "8002:8000"
    volumes:
-      - /root/team3/project4501_exp:/app
+      - /home/johnson/Desktop/project4501_exp/project4501_exp:/app
    command: bash -c "pip install requests && mod_wsgi-express start-server --log-to-terminal --reload-on-changes project4501_exp/wsgi.py"
 
-web:
+web1:
    image: tp33/django-docker:1.3
    links:
       - exp:exp-api
    ports:
-      - "8000:8000"
+      - "8005:8000"
    volumes:
-      - /root/team3/project4501_web:/app
+      - /home/johnson/Desktop/project4501_web/project4501_web:/app
+   command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
+
+web2:
+   image: tp33/django-docker:1.3
+   links:
+      - exp:exp-api
+   ports:
+      - "8006:8000"
+   volumes:
+      - /home/johnson/Desktop/project4501_web/project4501_web:/app
    command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
 
 batch:
@@ -184,5 +123,82 @@ batch:
    ports:
       - "8003:8000"
    volumes:
-      - /root/team3/project4501_batch:/app
+      - /home/johnson/Desktop/project4501_batch/project4501_batch:/app
    command: bash -c "pip install requests && python searchIndexer.py" 
+
+# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000
+# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000
+# docker-compose scale web=3
+# docker run -d --name pen -p 8000:8000 --link compose_web1_1:compose_web1_1 --link compose_web2_1:compose_web2_1 galexrt/pen:latest -r 8000 compose_web1_1:8000 compose_web2_1:8000
+# docker run -d --name pen -p 8000:8000 --link compose_web_1:compose_web_1 --link compose_web_2:compose_web_2 --link compose_web_3:compose_web_3 galexrt/pen:latest -r 8000 compose_web_1:8000 compose_web_2:8000 compose_web_3:8000
+
+# pen:
+#    image: galexrt/pen:latest
+#    links:
+#       - web1:web1
+#       - web2:web2
+#    ports:
+#       - "8000:8000"
+#    command: /usr/local/bin/pen -f -r 8000 web1:8000 web2:8000
+
+   # command: bash -c "-r 8000 web1:8000 web2:8000"
+   # command: bash -c "-r 8000 compose_web1_1:8000 compose_web2_1:8000"
+
+# # For DigitalOcean
+# kafka:
+#    image: spotify/kafka
+#    name: kafka
+#    environment:
+#       ADVERTISED_HOST: kafka
+#       ADVERTISED_PORT: 9092
+#    hostname: kafka
+
+# es:
+#    image: elasticsearch:2.0
+#    name: es
+#    ports:
+#       - "9200:9200"
+
+# models:
+#    image: tp33/django-docker:1.3
+#    external_links:
+#       - mysql:db
+#    ports:
+#       - "8001:8000"
+#    volumes:
+#       - /root/team3/project4501_models:/app
+#    command: bash -c "pip install requests && mod_wsgi-express start-server --reload-on-changes project4501_models/wsgi.py" 
+
+# exp:
+#    image: tp33/django-docker:1.3
+#    links:
+#       - models:models-api
+#       - kafka:kafka
+#       - es:es
+#    ports:
+#       - "8002:8000"
+#    volumes:
+#       - /root/team3/project4501_exp:/app
+#    command: bash -c "pip install requests && mod_wsgi-express start-server --log-to-terminal --reload-on-changes project4501_exp/wsgi.py"
+
+# web:
+#    image: tp33/django-docker:1.3
+#    links:
+#       - exp:exp-api
+#    ports:
+#       - "8000:8000"
+#    volumes:
+#       - /root/team3/project4501_web:/app
+#    command: bash -c "pip install requests  && chmod -R 755 /app/project4501_web/ && mod_wsgi-express start-server --working-directory /app --url-alias /static /app/project4501_web/static /app/project4501_web/wsgi.py --reload-on-changes"
+
+# batch:
+#    image: tp33/django-docker:1.3
+#    links:
+#       - kafka:kafka
+#       - es:es
+#       - exp:exp-api
+#    ports:
+#       - "8003:8000"
+#    volumes:
+#       - /root/team3/project4501_batch:/app
+#    command: bash -c "pip install requests && python searchIndexer.py" 
