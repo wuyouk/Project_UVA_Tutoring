@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block nav %}
+    <li>
+        <a href="{% url 'home'%}">About</a>
+    </li>
+    <li>
+        <a href={% url 'courses_info'%}>Courses</a>
+    </li>
+    <li id="logout">
+        <a href={% url 'logout'%}>Logout</a>
+    </li>
+    <li>
+        <a href={% url 'search'%}>Search</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <a name="logout"></a>
+    <div class="formcontainer">
+			<h2 id = "header1" style = "margin-bottom: 30px;">Are you sure you want to end your session?</h2>
+            <!-- Check this with group -->
+			<form action="/logout/" method="post">{% csrf_token %}
+				{{ form }}	
+		    	<div id="buttonstyle">
+		            <input type="submit"  id="button" name="Submit" value="Log out" class="pure-button pure-button-primary" />
+				</div>
+		    </form>
+	</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <a name="listing"></a>
+    <div class="formcontainer">
+            <div class = "error" style = "color:red;"> {{error}} </div>
+			<h2 id = "header1" style = "margin-bottom: 30px;">Create a new listing</h2>
+			<form action="/listing/" method="post">{% csrf_token %}
+				{{ form }}	
+		    	<div id="buttonstyle">
+		            <input type="submit"  id="button" name="Submit" value="Submit Listing" class="pure-button pure-button-primary" />
+				</div>
+		    </form>
+	</div>
+{% endblock %}

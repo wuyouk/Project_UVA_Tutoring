@@ -1,0 +1,88 @@
+[
+{
+    "pk": "f1aaa03c41dca0d37c0c17f2f38f0f5e2875e8e178123ae65614227ee8cd3cb6",
+    "fields": {
+        "user_id": "sam@gmail.com",
+        "date_created": "2016-03-21T06:46:19.172Z"
+    },
+    "model": "project4501_models.authenticator"
+},
+{
+    "pk": 1,
+    "fields": {
+        "name": "johnson",
+        "grade": 0,
+        "password": "pbkdf2_sha256$20000$DKxvrn3dEuTl$4G5OzYpJSpPSswxeTTKT2qsXEnmHQfqUVX0uVD2dJTU=",
+        "email": "johnson@gmail.com",
+        "phone": "1231231233",
+        "description": "I am an expert in computer programming, especially OOP programming language including JAVA, PYTHON, C++. I have been a TA for three CS courses, so I have sufficient teaching experience and my unique teaching methods. I obtained A+ for CS1111 and CS2150."
+    },
+    "model": "project4501_models.user"
+},
+{
+    "pk": 2,
+    "fields": {
+        "name": "Michael",
+        "grade": 0,
+        "password": "pbkdf2_sha256$20000$z5gB6ZBwO6KC$7s3Oej9TTDsOu8zyc7eFcq9NyBhP49nSqOO0fAIbZhg=",
+        "email": "michael@gmail.com",
+        "phone": "1231231233",
+        "description": "I am an expert at music! I have professional certificate in piano and violin. If you are a classic music lover and want to learn play an instrument, I would be your best choice!"
+    },
+    "model": "project4501_models.user"
+},
+{
+    "pk": 3,
+    "fields": {
+        "name": "Sam",
+        "grade": 0,
+        "password": "pbkdf2_sha256$20000$2X9fvE37KVfT$ipZd3vwDJULE6fabAXSBZ2dJruQkRnCFRSkExYaY2zI=",
+        "email": "sam@gmail.com",
+        "phone": "1231231233",
+        "description": "Find mathematics difficult? That's because you haven't found a right approach to solve them! Let me help you. I am a mathematical major student and I have a math courses CGPA 3.9!"
+    },
+    "model": "project4501_models.user"
+},
+{
+    "pk": 1,
+    "fields": {
+        "qualification": "ASTACAP Level 11",
+        "name": "Violin",
+        "tutor": 1,
+        "tag": "Music",
+        "popularity": 0,
+        "time": "Wednesday night and Saturday",
+        "price": 35,
+        "description": "I would base on your proficiency and design corresponding course materials. By following the sessions in http://violinlab.com/videoLibrary/.\\r\\nI am sure you can play Twinkle, Twinkle, Little Star after 10 courses even you are fresh to violin!"
+    },
+    "model": "project4501_models.course"
+},
+{
+    "pk": 2,
+    "fields": {
+        "qualification": "Apple internship",
+        "name": "iOS Development",
+        "tutor": 1,
+        "tag": "Programming",
+        "popularity": 0,
+        "time": "Weekend",
+        "price": 20,
+        "description": "Want to turn your great ideas into APP but without a clue of app development? With my carefully-crafted iOS 9 course, in just 15 courses, you can be develop your own app as well. By going through little projects with my elaborative guild, it's never been easier to turn your ideas into amazing apps"
+    },
+    "model": "project4501_models.course"
+},
+{
+    "pk": 3,
+    "fields": {
+        "qualification": "A+ in MATH 3315",
+        "name": "MATH 3315",
+        "tutor": 3,
+        "tag": "Mathematics",
+        "popularity": 0,
+        "time": "Weekday nights",
+        "price": 13,
+        "description": "Being desperate in Advanced Calculus and Linear Algebra II? Don't worry, I am here to help you. For every introduction of new and challenging concepts by professor, I will identify gaps in your knowledge and make detailed elaborations to ensure that the necessary foundations are in place for you to play with Advanced Calculus and Linear Algebra!"
+    },
+    "model": "project4501_models.course"
+}
+]

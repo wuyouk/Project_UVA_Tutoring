@@ -1,0 +1,14 @@
+{% extends "base.html" %}   
+{% block content %}
+    <a name="signup"></a>
+    <div class="formcontainer">
+            <div class = "error" style = "color:red;"> {{error}} </div>
+			<h2 id = "header1" style = "margin-bottom: 30px;">Join UVA Tutoring today.</h2>
+			<form action="/signup/" method="post">{% csrf_token %}
+				{{ form }}	
+		    	<div id="buttonstyle">
+		            <input type="submit"  id="button" name="Submit" value="Sign Up" class="pure-button pure-button-primary" />
+				</div>
+		    </form>
+	</div>
+{% endblock %}
